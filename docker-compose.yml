@@ -1,0 +1,67 @@
+services:
+  web:
+    container_name: odoo
+    image: odoo:18.0
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+    environment:
+      - HOST=${HOST}
+      - USER=${USER}
+      - PASSWORD_FILE=/run/secrets/postgresql_password
+    secrets:
+      - postgresql_password
+  db:
+    container_name: postgres
+    image: postgres:17
+    restart: always
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_PASSWORD_FILE=/run/secrets/postgresql_password
+      - POSTGRES_USER=${POSTGRES_USER}
+      - PGDATA=${PGDATA}
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
+    secrets:
+      - postgresql_password
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - 8080:8080
+  pgadmin:
+    container_name: pgadmin4
+    image: dpage/pgadmin4
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - 15080:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD_FILE=/run/secrets/pgadmin_default_password
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    secrets:
+      - pgadmin_default_password
+volumes:
+  odoo-web-data:
+  odoo-db-data:
+  pgadmin-data:
+
+secrets:
+  postgresql_password:
+    file: secrets/odoo_pg_pass
+  pgadmin_default_password:
+    file: secrets/pgadmin_default_password

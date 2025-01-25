@@ -1,0 +1,21 @@
+# Dockerfile
+Dockerfile
+
+# Documents
+docs
+
+# Examples
+examples
+
+# Resources
+resources
+
+# Environment variables
+.env
+
+# Docker secrets
+secrets
+
+# Log directories
+logs
+/scripts/logs/

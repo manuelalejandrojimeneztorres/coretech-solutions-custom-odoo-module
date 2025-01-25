@@ -1,0 +1,9 @@
+# Environment variables
+.env
+
+# Docker secrets
+secrets
+
+# Log directories
+logs
+scripts/logs
