@@ -5,7 +5,7 @@
         <record id="action_customer" model="ir.actions.act_window">
             <field name="name">Customers</field>
             <field name="res_model">distribution.customer</field>
-            <field name="view_mode">form,kanban,tree</field>
+            <field name="view_mode">kanban,tree,form</field>
             <field name="help" type="html">
                 <p>Manage your customers effectively.</p>
             </field>
@@ -15,7 +15,7 @@
         <record id="action_warehouse" model="ir.actions.act_window">
             <field name="name">Warehouses</field>
             <field name="res_model">distribution.warehouse</field>
-            <field name="view_mode">form,kanban,tree</field>
+            <field name="view_mode">kanban,tree,form</field>
             <field name="help" type="html">
                 <p>Manage and track your warehouses, locations, and capacities.</p>
             </field>
@@ -25,7 +25,7 @@
         <record id="action_product" model="ir.actions.act_window">
             <field name="name">Products</field>
             <field name="res_model">distribution.product</field>
-            <field name="view_mode">form,kanban,tree</field>
+            <field name="view_mode">kanban,tree,form</field>
             <field name="help" type="html">
                 <p>Manage your product catalog, pricing, and stock levels.</p>
             </field>
@@ -35,7 +35,7 @@
         <record id="action_sale" model="ir.actions.act_window">
             <field name="name">Sales</field>
             <field name="res_model">distribution.sale</field>
-            <field name="view_mode">form,kanban,tree</field>
+            <field name="view_mode">kanban,tree,form</field>
             <field name="help" type="html">
                 <p>Track and manage your sales orders efficiently.</p>
             </field>
@@ -45,7 +45,7 @@
         <record id="action_stock" model="ir.actions.act_window">
             <field name="name">Stock</field>
             <field name="res_model">distribution.stock</field>
-            <field name="view_mode">form,kanban,tree</field>
+            <field name="view_mode">kanban,tree,form</field>
             <field name="help" type="html">
                 <p>Monitor and adjust stock levels efficiently.</p>
             </field>
@@ -55,7 +55,7 @@
         <record id="action_order_line" model="ir.actions.act_window">
             <field name="name">Order Lines</field>
             <field name="res_model">distribution.order_line</field>
-            <field name="view_mode">form,kanban,tree</field>
+            <field name="view_mode">kanban,tree,form</field>
             <field name="help" type="html">
                 <p>Manage the individual items in sales orders.</p>
             </field>

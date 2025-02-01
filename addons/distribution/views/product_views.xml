@@ -133,7 +133,7 @@
         <record id="action_product" model="ir.actions.act_window">
             <field name="name">Products</field>
             <field name="res_model">distribution.product</field>
-            <field name="view_mode">form,kanban,tree</field>
+            <field name="view_mode">kanban,tree,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     Create your first product
