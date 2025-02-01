@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Demo sales records -->
+        <!-- <record id="demo_sale_1" model="distribution.sale">
+            <field name="customer_id" ref="demo_customer_1" />
+            <field name="date_order">2025-01-01</field>
+            <field name="state">draft</field>
+        </record>
+        <record id="demo_sale_2" model="distribution.sale">
+            <field name="customer_id" ref="demo_customer_2" />
+            <field name="date_order">2025-01-02</field>
+            <field name="state">confirmed</field>
+        </record> -->
+    </data>
+</odoo>

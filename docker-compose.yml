@@ -1,7 +1,7 @@
 services:
   web:
     container_name: odoo
-    image: odoo:18.0
+    image: odoo:16.0
     restart: always
     depends_on:
       - db
@@ -19,7 +19,7 @@ services:
       - postgresql_password
   db:
     container_name: postgres
-    image: postgres:17
+    image: postgres:15
     restart: always
     ports:
       - "${PORT}:${PORT}"

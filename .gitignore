@@ -6,4 +6,11 @@ secrets
 
 # Log directories
 logs
+scripts/data
 scripts/logs
+
+# Python cache and precompiled bytecode
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd

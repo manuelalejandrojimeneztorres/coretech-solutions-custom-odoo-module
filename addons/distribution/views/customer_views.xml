@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Customer Form View -->
+        <record id="view_customer_form" model="ir.ui.view">
+            <field name="name">distribution.customer.form</field>
+            <field name="model">distribution.customer</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="active" widget="boolean_button"
+                            options="{'terminology': 'archive'}" />
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <field name="image_1920" widget="image" class="oe_avatar"
+                                options="{'size': (150, 150)}" />
+                            <h1>
+                                <field name="name" />
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Contact Information" col="6">
+                                <field name="email" widget="email" />
+                                <field name="phone" widget="phone" />
+                                <field name="vat" string="VAT" placeholder="AB-123456789" />
+                            </group>
+                            <group string="Location" col="6">
+                                <field name="address" placeholder="Full physical address..."
+                                    nolabel="1" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Sales History">
+                                <field name="sale_ids">
+                                    <tree>
+                                        <field name="name" string="Name" />
+                                        <field name="date" string="Order Date" />
+                                        <field name="total_amount" string="Total Amount" />
+                                        <field name="state" string="State" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter" />
+                </form>
+            </field>
+        </record>
+
+        <!-- Customer Kanban View -->
+        <record id="view_customer_kanban" model="ir.ui.view">
+            <field name="name">distribution.customer.kanban</field>
+            <field name="model">distribution.customer</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_view">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card oe_kanban_global_click">
+                                <t t-if="not record.active.raw_value">
+                                    <div class="oe_kanban_ribbon oe_kanban_ribbon_red">
+                                        <span>Archived</span>
+                                    </div>
+                                </t>
+                                <div class="o_kanban_image">
+                                    <img
+                                        t-att-src="record.image_1920.raw_value ? ('data:image/png;base64,' + record.image_1920.raw_value) : '/web/static/img/customer-placeholder.png'"
+                                        class="oe_kanban_image img-fluid rounded-circle" />
+                                </div>
+                                <div class="o_kanban_details">
+                                    <strong>
+                                        <field name="name" />
+                                    </strong>
+                                    <div class="text-muted">
+                                        <field name="email" widget="email" />
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-phone" />
+                                        <field name="phone" />
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-address-card" />
+                                        <field name="vat" />
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Customer Tree View -->
+        <record id="view_customer_tree" model="ir.ui.view">
+            <field name="name">distribution.customer.tree</field>
+            <field name="model">distribution.customer</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="image_1920" widget="image" options="{'size': (45, 45)}" />
+                    <field name="name" />
+                    <field name="email" widget="email" />
+                    <field name="phone" widget="phone" />
+                    <field name="vat" />
+                    <field name="active" widget="boolean_toggle" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Window Action -->
+        <record id="action_customer" model="ir.actions.act_window">
+            <field name="name">Customers</field>
+            <field name="res_model">distribution.customer</field>
+            <field name="view_mode">form,kanban,tree</field>
+            <field name="context">{'search_default_active': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first customer
+                </p>
+            </field>
+        </record>
+
+        <!-- Main Menu Structure -->
+        <menuitem id="menu_customer_main" name="Customers" parent="distribution.menu_root" />
+        <menuitem id="menu_customer_management" name="Customer Management"
+            parent="menu_customer_main" action="action_customer" />
+    </data>
+</odoo>

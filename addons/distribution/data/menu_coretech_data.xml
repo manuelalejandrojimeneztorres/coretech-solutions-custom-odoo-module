@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Root Menu -->
+        <menuitem id="distribution.menu_root" name="CoreTech Distribution" sequence="10" />
+
+        <!-- Customer Root Menu -->
+        <!-- <menuitem id="distribution.menu_customers_root" name="Customers" parent="distribution.menu_root"
+            sequence="20" /> -->
+        <!-- Customer Submenu -->
+        <!-- <menuitem id="distribution.menu_customer" name="Manage Customers"
+            parent="distribution.menu_customers_root"
+            action="action_customer" sequence="21" /> -->
+
+        <!-- Inventory Root Menu -->
+        <!-- <menuitem id="distribution.menu_inventory_root" name="Inventory" parent="distribution.menu_root"
+            sequence="30" /> -->
+        <!-- Warehouse Submenu -->
+        <!-- <menuitem id="distribution.menu_warehouse" name="Warehouses"
+            parent="distribution.menu_inventory_root"
+            action="action_warehouse" sequence="31" /> -->
+        <!-- Product Submenu -->
+        <!-- <menuitem id="distribution.menu_product" name="Products" parent="distribution.menu_inventory_root"
+            action="action_product" sequence="32" /> -->
+        <!-- Stock Submenu -->
+        <!-- <menuitem id="distribution.menu_stock" name="Stock" parent="distribution.menu_inventory_root"
+            action="action_stock"
+            sequence="33" /> -->
+
+        <!-- Sales Root Menu -->
+        <!-- <menuitem id="distribution.menu_sales_root" name="Sales" parent="distribution.menu_root"
+            sequence="40" /> -->
+        <!-- Sales Submenu -->
+        <!-- <menuitem id="distribution.menu_sale" name="Sales" parent="distribution.menu_sales_root"
+            action="action_sale"
+            sequence="41" /> -->
+        <!-- Order Line Submenu -->
+        <!-- <menuitem id="distribution.menu_order_line" name="Order Lines" parent="distribution.menu_sales_root"
+            action="action_order_line" sequence="42" /> -->
+
+
+        <!-- Customer Menu -->
+        <menuitem id="distribution.menu_customer" name="Customers" parent="distribution.menu_root"
+            sequence="20" />
+
+        <!-- Warehouse Menu -->
+        <menuitem id="distribution.menu_warehouse" name="Warehouses" parent="distribution.menu_root"
+            sequence="30" />
+
+        <!-- Product Menu -->
+        <menuitem id="distribution.menu_product" name="Products" parent="distribution.menu_root"
+            sequence="40" />
+
+        <!-- Stock Menu -->
+        <menuitem id="distribution.menu_stock" name="Stock" parent="distribution.menu_root" sequence="50" />
+
+        <!-- Sales Menu -->
+        <menuitem id="distribution.menu_sale" name="Sales" parent="distribution.menu_root" sequence="60" />
+
+        <!-- Order Line Menu -->
+        <menuitem id="distribution.menu_order_line" name="Order Lines" parent="distribution.menu_root"
+            sequence="70" />
+    </data>
+</odoo>

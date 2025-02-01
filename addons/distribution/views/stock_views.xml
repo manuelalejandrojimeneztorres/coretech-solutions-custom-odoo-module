@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Stock Form View -->
+        <record id="view_stock_form" model="ir.ui.view">
+            <field name="name">distribution.stock.form</field>
+            <field name="model">distribution.stock</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="product_id" widget="many2one_avatar" />
+                                <field name="warehouse_id" widget="many2one_avatar" />
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Stock Details" col="6">
+                                <field name="product_id" options="{'no_open': True}" />
+                                <field name="warehouse_id" options="{'no_open': True}" />
+                                <field name="last_inventory_date" widget="datetime" />
+                            </group>
+                            <group string="Quantities" col="6">
+                                <field name="quantity" class="oe_inline" />
+                                <span class="text-muted ml-2">units in stock</span>
+                                <div class="mt-2">
+                                    <field name="reserved_quantity" class="oe_inline" />
+                                    <span class="text-muted ml-2">units reserved</span>
+                                </div>
+                                <div class="mt-2 alert alert-info"> Available: <span
+                                        class="font-weight-bold">
+                                        <field name="quantity" readonly="1" /> - <field
+                                            name="reserved_quantity" readonly="1" /> = <span
+                                            class="text-success">
+                                            <span
+                                                t-esc="record.quantity.raw_value - record.reserved_quantity.raw_value" />
+                                        </span>
+                                    </span>
+                                </div>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Stock Kanban View -->
+        <record id="view_stock_kanban" model="ir.ui.view">
+            <field name="name">distribution.stock.kanban</field>
+            <field name="model">distribution.stock</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_view">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card oe_kanban_global_click">
+                                <div class="o_kanban_details">
+                                    <strong class="d-block">
+                                        <field name="product_id" widget="many2one_avatar" />
+                                    </strong>
+                                    <div class="text-muted mt-2">
+                                        <i class="fa fa-warehouse" />
+                                        <field name="warehouse_id" />
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col">
+                                            <span class="o_badge o_badge-success">
+                                                <i class="fa fa-cubes" /> Stock: <field
+                                                    name="quantity" />
+                                            </span>
+                                        </div>
+                                        <div class="col">
+                                            <span class="o_badge o_badge-warning">
+                                                <i class="fa fa-lock" /> Reserved: <field
+                                                    name="reserved_quantity" />
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 text-muted small">
+                                        <i class="fa fa-calendar" /> Last counted: <field
+                                            name="last_inventory_date" widget="date" />
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Stock Tree View -->
+        <record id="view_stock_tree" model="ir.ui.view">
+            <field name="name">distribution.stock.tree</field>
+            <field name="model">distribution.stock</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="product_id" widget="many2one_avatar" />
+                    <field name="warehouse_id" />
+                    <field name="quantity" sum="Total Stock" />
+                    <field name="reserved_quantity" sum="Total Reserved" />
+                    <field name="last_inventory_date" widget="datetime" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Window Action -->
+        <record id="action_stock" model="ir.actions.act_window">
+            <field name="name">Stock</field>
+            <field name="res_model">distribution.stock</field>
+            <field name="view_mode">form,kanban,tree</field>
+            <field name="context">{'search_default_group_by_product': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Configure your initial stock levels
+                </p>
+            </field>
+        </record>
+
+        <!-- Main Menu Structure -->
+        <menuitem id="menu_stock_main" name="Stock" parent="distribution.menu_root" />
+        <menuitem id="menu_stock_management" name="Stock Management"
+            parent="menu_stock_main" action="action_stock" />
+    </data>
+</odoo>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Sale Order Form View -->
+        <record id="view_sale_form" model="ir.ui.view">
+            <field name="name">distribution.sale.form</field>
+            <field name="model">distribution.sale</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar"
+                            statusbar_visible="draft,confirmed,done,cancel" />
+                        <button name="action_confirm" string="Confirm" type="object"
+                            class="oe_highlight" states="draft" />
+                        <button name="action_done" string="Mark Done" type="object"
+                            states="confirmed" />
+                        <button name="action_cancel" string="Cancel" type="object"
+                            states="draft,confirmed" class="btn-danger" />
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" />
+                            </h1>
+                            <h2 class="text-muted">
+                                <field name="customer_id" widget="many2one_avatar" />
+                                <field name="date" widget="datetime" />
+                            </h2>
+                        </div>
+                        <group>
+                            <group string="Order Details" col="6">
+                                <field name="customer_id" options="{'no_open': True}" />
+                                <field name="warehouse_id" options="{'no_open': True}" />
+                                <field name="currency_id" widget="res_currency" invisible="1" />
+                            </group>
+                            <group string="Financial" col="6">
+                                <field name="total_amount" widget="monetary"
+                                    options="{'currency_field': 'currency_id'}"
+                                    readonly="1" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Order Lines">
+                                <field name="order_line_ids">
+                                    <tree editable="bottom">
+                                        <field name="available_product_ids" invisible="1" />
+                                        <field name="product_id" widget="many2one_avatar"
+                                            domain="[('id', 'in', available_product_ids)]" />
+                                        <field name="quantity" />
+                                        <field name="price_unit" widget="monetary"
+                                            options="{'currency_field': 'parent.currency_id'}" />
+                                        <field name="subtotal" widget="monetary"
+                                            options="{'currency_field': 'parent.currency_id'}"
+                                            readonly="1" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter" />
+                </form>
+            </field>
+        </record>
+
+        <!-- Sale Order Kanban View -->
+        <record id="view_sale_kanban" model="ir.ui.view">
+            <field name="name">distribution.sale.kanban</field>
+            <field name="model">distribution.sale</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_view">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card oe_kanban_global_click">
+                                <div class="o_kanban_details">
+                                    <strong class="d-block">
+                                        <field name="name" />
+                                        <field name="customer_id" widget="many2one_avatar" />
+                                    </strong>
+                                    <div class="text-muted mt-2">
+                                        <i class="fa fa-calendar" />
+                                        <field name="date" widget="date" />
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col">
+                                            <span class="o_badge"
+                                                t-att-class="'o_badge_' + record.state.raw_value">
+                                                <field name="state" />
+                                            </span>
+                                        </div>
+                                        <div class="col">
+                                            <span class="o_badge o_badge-success">
+                                                <i class="fa fa-dollar" />
+                                                <field name="total_amount" widget="monetary" />
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <i class="fa fa-warehouse" />
+                                        <field name="warehouse_id" />
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Sale Order Tree View -->
+        <record id="view_sale_tree" model="ir.ui.view">
+            <field name="name">distribution.sale.tree</field>
+            <field name="model">distribution.sale</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="date" widget="date" />
+                    <field name="customer_id" widget="many2one_avatar" />
+                    <field name="warehouse_id" />
+                    <field name="total_amount" widget="monetary" />
+                    <field name="state" widget="selection_badge" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Window Action -->
+        <record id="action_sale" model="ir.actions.act_window">
+            <field name="name">Sales Orders</field>
+            <field name="res_model">distribution.sale</field>
+            <field name="view_mode">form,kanban,tree</field>
+            <field name="context">{'search_default_draft': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first sales order
+                </p>
+            </field>
+        </record>
+
+        <!-- Main Menu Structure -->
+        <menuitem id="menu_sale_main" name="Sales Orders" parent="distribution.menu_root" />
+        <menuitem id="menu_sale_management" name="Sales Order Management"
+            parent="menu_sale_main" action="action_sale" />
+    </data>
+</odoo>

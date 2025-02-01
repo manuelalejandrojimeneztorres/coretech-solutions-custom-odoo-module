@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Demo customer records -->
+        <!-- <record id="demo_customer_1" model="distribution.customer">
+            <field name="name">John Doe</field>
+            <field name="email">john.doe@example.com</field>
+            <field name="phone">+123456789</field>
+            <field name="address">123 Demo Street</field>
+        </record>
+        <record id="demo_customer_2" model="distribution.customer">
+            <field name="name">Jane Smith</field>
+            <field name="email">jane.smith@example.com</field>
+            <field name="phone">+987654321</field>
+            <field name="address">456 Example Avenue</field>
+        </record> -->
+    </data>
+</odoo>

@@ -1,10 +1,11 @@
 # CoreTech Solutions Custom Odoo Module
 
-![Odoo](https://img.shields.io/badge/Odoo-18.0-32CD32?style=for-the-badge&logo=odoo)
+![Odoo](https://img.shields.io/badge/Odoo-16.0-32CD32?style=for-the-badge&logo=odoo)
 ![Docker Desktop](https://img.shields.io/badge/Docker-4.37.1-2A2D32?style=for-the-badge&logo=docker)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-4169E1?style=for-the-badge&logo=postgresql)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?style=for-the-badge&logo=postgresql)
 ![pgAdmin](https://img.shields.io/badge/pgAdmin-4-800080?style=for-the-badge&logo=postgresql)
 ![Adminer](https://img.shields.io/badge/Adminer-4.8.1-228B22?style=for-the-badge&logo=adminer)
+![Python](https://img.shields.io/badge/Python-3.13-3776AB?style=for-the-badge&logo=python)
 ![License](https://img.shields.io/badge/License-Apache%202.0-FF8C00?style=for-the-badge)
 ![Build Status](https://img.shields.io/github/actions/workflow/status/manuelalejandrojimeneztorres/coretech-solutions-custom-odoo-module/backend-ci.yml?style=for-the-badge)
 ![Coverage](https://img.shields.io/codecov/c/github/manuelalejandrojimeneztorres/coretech-solutions-custom-odoo-module?style=for-the-badge)
@@ -12,7 +13,7 @@
 
 ## Description
 
-The **CoreTech Solutions Custom Odoo Module** is a robust, enterprise-grade solution tailored for managing the distribution of electronic and IT components across CoreTech Solutions' global network of distribution centers. Designed with **Docker**, **PostgreSQL**, and tools like **pgAdmin** and **Adminer**, this module offers flexibility, security, and efficiency, ensuring seamless integration with Odoo 18.0.
+The **CoreTech Solutions Custom Odoo Module** is a robust, enterprise-grade solution tailored for managing the distribution of electronic and IT components across CoreTech Solutions' global network of distribution centers. Designed with **Docker**, **PostgreSQL**, and tools like **pgAdmin** and **Adminer**, this module offers flexibility, security, and efficiency, ensuring seamless integration with Odoo 16.0.
 
 ---
 
@@ -305,13 +306,13 @@ Store sensitive data using environment variables. Examples:
 
 Key dependencies include:
 
-- **Odoo v18.0**: Open-source ERP framework for building and customizing business applications.
+- **Odoo v16.0**: Open-source ERP framework for building and customizing business applications.
 - **Docker Desktop v4.37.1**: Desktop application for managing Docker containers and images on macOS and Windows.
 - **Docker Compose v2.32.4**: Tool for defining and running multi-container Docker applications.
 - **Docker Swarm**: Native clustering and orchestration tool for managing Docker containers across multiple hosts.
 - **WSL v2**: Windows Subsystem for Linux, enabling a full Linux kernel on Windows for Docker and other tools.
 - **Ubuntu v24.04.1 (Noble Numbat)**: Linux distribution for the host environment, providing compatibility and stability for server-side applications.
-- **PostgreSQL v17**: Relational database management system used by Odoo.
+- **PostgreSQL v15**: Relational database management system used by Odoo.
 - **pgAdmin v4**: Web-based interface for managing PostgreSQL databases.
 - **Adminer v4.8.1**: Lightweight database management tool supporting multiple database systems, including PostgreSQL.
 - **Python v3.13.1**: Programming language for running Odoo and managing various scripts and automation tasks.

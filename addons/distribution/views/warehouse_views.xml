@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Warehouse Form View -->
+        <record id="view_warehouse_form" model="ir.ui.view">
+            <field name="name">distribution.warehouse.form</field>
+            <field name="model">distribution.warehouse</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="active" widget="boolean_button"
+                            options="{'terminology': 'archive'}" />
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" />
+                            </h1>
+                            <h2 class="text-muted">
+                                <field name="code" /> • <field name="location" />
+                            </h2>
+                        </div>
+                        <group>
+                            <group string="Basic Information" col="6">
+                                <field name="code" placeholder="WH-001" required="1" />
+                                <field name="manager_id"
+                                    placeholder="Select warehouse manager"
+                                    options="{'no_open': True}" />
+                                <field name="company_id" widget="res_company" />
+                            </group>
+                            <group string="Capacity Details" col="6">
+                                <field name="capacity"
+                                    widget="integer"
+                                    class="oe_inline"
+                                    placeholder="0" />
+                                <span class="text-muted ml-2">cubic meters</span>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Inventory">
+                                <field name="product_ids" widget="many2many_tags"
+                                    options="{'color_field': 'color', 'no_create': True}"
+                                    placeholder="Select available products" />
+                                <field name="stock_ids" mode="tree">
+                                    <tree>
+                                        <field name="product_id" />
+                                        <field name="quantity" />
+                                        <field name="reserved_quantity" />
+                                        <field name="last_inventory_date" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Warehouse Kanban View -->
+        <record id="view_warehouse_kanban" model="ir.ui.view">
+            <field name="name">distribution.warehouse.kanban</field>
+            <field name="model">distribution.warehouse</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_view">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card oe_kanban_global_click">
+                                <t t-if="not record.active.raw_value">
+                                    <div class="oe_kanban_ribbon oe_kanban_ribbon_red">
+                                        <span>Archived</span>
+                                    </div>
+                                </t>
+                                <div class="o_kanban_details">
+                                    <strong class="d-block">
+                                        <field name="code" /> - <field name="name" />
+                                    </strong>
+                                    <div class="text-muted mt-2">
+                                        <i class="fa fa-map-marker" />
+                                        <field name="location" />
+                                    </div>
+                                    <div class="mt-2">
+                                        <i class="fa fa-user" />
+                                        <field name="manager_id" widget="many2one_avatar" />
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col">
+                                            <span class="o_badge o_badge-success">
+                                                <i class="fa fa-cube" /> Capacity: <field
+                                                    name="capacity" />
+                                            </span>
+                                        </div>
+                                        <div class="col">
+                                            <span class="o_badge">
+                                                <i class="fa fa-building" />
+                                                <field name="company_id" />
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Warehouse Tree View -->
+        <record id="view_warehouse_tree" model="ir.ui.view">
+            <field name="name">distribution.warehouse.tree</field>
+            <field name="model">distribution.warehouse</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="code" />
+                    <field name="name" />
+                    <field name="location" />
+                    <field name="manager_id" widget="many2one_avatar" />
+                    <field name="capacity" sum="Total Capacity" />
+                    <field name="active" widget="boolean_toggle" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Window Action -->
+        <record id="action_warehouse" model="ir.actions.act_window">
+            <field name="name">Warehouses</field>
+            <field name="res_model">distribution.warehouse</field>
+            <field name="view_mode">form,kanban,tree</field>
+            <field name="context">{'search_default_active': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first warehouse
+                </p>
+            </field>
+        </record>
+
+        <!-- Main Menu Structure -->
+        <menuitem id="menu_warehouse_main" name="Warehouses" parent="distribution.menu_root" />
+        <menuitem id="menu_warehouse_management" name="Warehouse Management"
+            parent="menu_warehouse_main" action="action_warehouse" />
+    </data>
+</odoo>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Product Form View -->
+        <record id="view_product_form" model="ir.ui.view">
+            <field name="name">distribution.product.form</field>
+            <field name="model">distribution.product</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <field name="image_1920" widget="image" class="oe_avatar"
+                                options="{'size': (150, 150)}" />
+                            <div class="oe_header_content">
+                                <h1>
+                                    <field name="name" />
+                                </h1>
+                                <div class="text-muted">
+                                    <field name="sku" /> • <field name="barcode" widget="barcode" />
+                                </div>
+                            </div>
+                        </div>
+                        <group>
+                            <group string="Basic Information" col="6">
+                                <field name="price" widget="monetary"
+                                    options="{'currency_field': 'currency_id'}" />
+                                <field name="warehouse_ids" widget="many2many_tags"
+                                    placeholder="Select available warehouses" />
+                                <field name="description" placeholder="Short product description..." />
+                            </group>
+                            <group string="Stock Overview" col="6">
+                                <field name="stock_quantity" readonly="1" string="Available Stock" />
+                                <field name="stock_ids" mode="kanban" class="mt-4">
+                                    <kanban>
+                                        <field name="warehouse_id" />
+                                        <field name="quantity" />
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                                <div class="oe_kanban_card">
+                                                    <div class="o_kanban_details">
+                                                        <strong>
+                                                            <field name="warehouse_id" />
+                                                        </strong>
+                                                        <div class="text-muted mt-2"> Stock: <field
+                                                                name="quantity" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                </field>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Details">
+                                <field name="detailed_description" widget="html" />
+                            </page>
+                            <page string="Sales">
+                                <field name="order_line_ids">
+                                    <tree>
+                                        <field name="quantity" />
+                                        <field name="price_unit" />
+                                        <field name="subtotal" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Product Kanban View -->
+        <record id="view_product_kanban" model="ir.ui.view">
+            <field name="name">distribution.product.kanban</field>
+            <field name="model">distribution.product</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_view">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card oe_kanban_global_click">
+                                <div class="o_kanban_image">
+                                    <img
+                                        t-att-src="record.image_1920.raw_value ? ('data:image/png;base64,' + record.image_1920.raw_value) : '/web/static/img/product-placeholder.png'"
+                                        class="oe_kanban_image img-fluid" />
+                                </div>
+                                <div class="o_kanban_details">
+                                    <strong>
+                                        <field name="name" />
+                                    </strong>
+                                    <div class="text-muted">
+                                        <field name="sku" />
+                                    </div>
+                                    <div class="mt-2">
+                                        <span class="o_badge o_badge-success">
+                                            <i class="fa fa-dollar" />
+                                            <field name="price" widget="monetary" />
+                                        </span>
+                                        <span class="o_badge o_badge-info ml-2">
+                                            <i class="fa fa-cubes" /> Stock: <field
+                                                name="stock_quantity" />
+                                        </span>
+                                    </div>
+                                    <div class="mt-2">
+                                        <field name="warehouse_ids" widget="many2many_tags"
+                                            options="{'color_field': 'color', 'no_create': True}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Product Tree View -->
+        <record id="view_product_tree" model="ir.ui.view">
+            <field name="name">distribution.product.tree</field>
+            <field name="model">distribution.product</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="image_1920" widget="image" options="{'size': (45, 45)}" />
+                    <field name="name" />
+                    <field name="sku" />
+                    <field name="price" widget="monetary" />
+                    <field name="stock_quantity" string="Stock" sum="Total Stock" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Window Action -->
+        <record id="action_product" model="ir.actions.act_window">
+            <field name="name">Products</field>
+            <field name="res_model">distribution.product</field>
+            <field name="view_mode">form,kanban,tree</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first product
+                </p>
+            </field>
+        </record>
+
+        <!-- Main Menu Structure -->
+        <menuitem id="menu_product_main" name="Products" parent="distribution.menu_root" />
+        <menuitem id="menu_product_management" name="Product Management"
+            parent="menu_product_main" action="action_product" />
+    </data>
+</odoo>

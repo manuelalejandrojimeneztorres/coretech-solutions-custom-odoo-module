@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Order Line Form View -->
+        <record id="view_order_line_form" model="ir.ui.view">
+            <field name="name">distribution.order_line.form</field>
+            <field name="model">distribution.order_line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group string="Order Information" col="6">
+                                <field name="available_product_ids" invisible="1" />
+                                <field name="sale_id" options="{'no_open': True}" readonly="1" />
+                                <field name="product_id" widget="many2one_avatar"
+                                    domain="[('id', 'in', available_product_ids)]"
+                                    options="{'no_create': True}" />
+                                <field name="stock_id" readonly="1" />
+                            </group>
+                            <group string="Pricing" col="6">
+                                <field name="quantity" class="oe_inline" />
+                                <field name="price_unit" widget="monetary"
+                                    options="{'currency_field': 'currency_id'}" />
+                                <field name="subtotal" widget="monetary"
+                                    options="{'currency_field': 'currency_id'}"
+                                    readonly="1" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Order Line Kanban View -->
+        <record id="view_order_line_kanban" model="ir.ui.view">
+            <field name="name">distribution.order_line.kanban</field>
+            <field name="model">distribution.order_line</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_view">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card oe_kanban_global_click">
+                                <div class="o_kanban_details">
+                                    <strong class="d-block">
+                                        <field name="product_id" widget="many2one_avatar" />
+                                    </strong>
+                                    <div class="row mt-2">
+                                        <div class="col">
+                                            <span class="o_badge o_badge-info">
+                                                <i class="fa fa-cube" /> Qty: <field name="quantity" />
+                                            </span>
+                                        </div>
+                                        <div class="col">
+                                            <span class="o_badge o_badge-success">
+                                                <i class="fa fa-dollar" /> Each: <field
+                                                    name="price_unit" widget="monetary" />
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 text-primary">
+                                        <i class="fa fa-calculator" /> Total: <field name="subtotal"
+                                            widget="monetary" />
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Order Line Tree View -->
+        <record id="view_order_line_tree" model="ir.ui.view">
+            <field name="name">distribution.order_line.tree</field>
+            <field name="model">distribution.order_line</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="available_product_ids" invisible="1" />
+                    <field name="product_id" widget="many2one_avatar" />
+                    <field name="product_id" widget="many2one_avatar"
+                        domain="[('id', 'in', available_product_ids)]" />
+                    <field name="quantity" class="oe_number" />
+                    <field name="price_unit" widget="monetary"
+                        options="{'currency_field': 'currency_id'}" />
+                    <field name="subtotal" widget="monetary"
+                        options="{'currency_field': 'currency_id'}"
+                        sum="Total" />
+                    <field name="stock_id" invisible="1" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Window Action -->
+        <record id="action_order_line" model="ir.actions.act_window">
+            <field name="name">Order Lines</field>
+            <field name="res_model">distribution.order_line</field>
+            <field name="view_mode">form,kanban,tree</field>
+            <field name="context">{'search_default_group_by_product': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Track all order lines across sales
+                </p>
+            </field>
+        </record>
+
+        <!-- Main Menu Structure -->
+        <menuitem id="menu_order_line_main" name="Order Lines" parent="distribution.menu_root" />
+        <menuitem id="menu_order_line_management" name="Order Line Management"
+            parent="menu_order_line_main" action="action_order_line" />
+    </data>
+</odoo>

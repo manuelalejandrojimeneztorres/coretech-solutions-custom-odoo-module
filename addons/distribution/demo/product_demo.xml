@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Demo product records -->
+        <!-- <record id="demo_product_1" model="distribution.product">
+            <field name="name">Demo Product A</field>
+            <field name="price">10.0</field>
+            <field name="quantity">100</field>
+        </record>
+        <record id="demo_product_2" model="distribution.product">
+            <field name="name">Demo Product B</field>
+            <field name="price">20.0</field>
+            <field name="quantity">200</field>
+        </record> -->
+    </data>
+</odoo>
