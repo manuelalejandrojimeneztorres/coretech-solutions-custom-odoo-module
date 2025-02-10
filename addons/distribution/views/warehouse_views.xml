@@ -39,7 +39,7 @@
                         <notebook>
                             <page string="Inventory">
                                 <field name="product_ids" widget="many2many_tags"
-                                    options="{'color_field': 'color', 'no_create': True}"
+                                    options="{'no_create': True}"
                                     placeholder="Select available products" />
                                 <field name="stock_ids" mode="tree">
                                     <tree>
@@ -57,7 +57,7 @@
         </record>
 
         <!-- Warehouse Kanban View -->
-        <record id="view_warehouse_kanban" model="ir.ui.view">
+        <!-- <record id="view_warehouse_kanban" model="ir.ui.view">
             <field name="name">distribution.warehouse.kanban</field>
             <field name="model">distribution.warehouse</field>
             <field name="arch" type="xml">
@@ -102,7 +102,7 @@
                     </templates>
                 </kanban>
             </field>
-        </record>
+        </record> -->
 
         <!-- Warehouse Tree View -->
         <record id="view_warehouse_tree" model="ir.ui.view">

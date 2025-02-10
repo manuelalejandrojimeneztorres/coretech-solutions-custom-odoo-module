@@ -33,6 +33,11 @@ class Stock(models.Model):
         default=0,
         help="Quantity reserved for pending orders"
     )
+    available_quantity = fields.Float(
+        string="Available Quantity",
+        compute="_compute_available_quantity",
+        store=True
+    )
     last_inventory_date = fields.Datetime(string='Last Inventory Date')
 
     _sql_constraints = [
@@ -43,3 +48,7 @@ class Stock(models.Model):
 
     def name_get(self):
         return [(record.id, f"{record.product_id.name} - {record.warehouse_id.name}") for record in self]
+
+    def _compute_available_quantity(self):
+        for record in self:
+            record.available_quantity = record.quantity - record.reserved_quantity

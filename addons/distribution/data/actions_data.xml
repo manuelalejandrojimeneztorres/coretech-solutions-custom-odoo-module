@@ -35,17 +35,58 @@
         <record id="action_sale" model="ir.actions.act_window">
             <field name="name">Sales</field>
             <field name="res_model">distribution.sale</field>
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">kanban,tree,form,graph,pivot</field>
             <field name="help" type="html">
                 <p>Track and manage your sales orders efficiently.</p>
             </field>
+        </record>
+
+        <!-- Action for Sales Dashboard View -->
+        <record id="action_sale_dashboard" model="ir.actions.act_window">
+            <field name="name">Interactive Sales Order Dashboard</field>
+            <field name="res_model">distribution.sale</field>
+            <field name="view_mode">graph,pivot,tree</field>
+            <field name="context">{
+                'search_default_last_month': 1,
+                'graph_measure': 'total_amount',
+                'graph_group_by': 'warehouse_id'
+                }</field>
+            <field name="help" type="html">
+                <p>Perform analysis with pivot tables.</p>
+            </field>
+        </record>
+
+        <!-- Custom Paper Format -->
+        <record id="custom_paperformat" model="report.paperformat">
+            <field name="name">Custom Paper Format</field>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">15</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line">False</field>
+        </record>
+
+        <!-- Action for Sale Order Report -->
+        <record id="action_report_sale" model="ir.actions.report">
+            <field name="name">Sale Order</field>
+            <field name="model">distribution.sale</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">distribution.report_sale_order</field>
+            <field name="report_file">distribution.report_sale_order</field>
+            <field name="print_report_name">'Sale_Order_%s' % (object.name)</field>
+            <field name="binding_model_id" ref="model_distribution_sale" />
+            <field name="binding_type">report</field>
+            <field name="binding_view_types">form</field>
+            <field name="paperformat_id" ref="distribution.custom_paperformat" />
         </record>
 
         <!-- Action for Stock View -->
         <record id="action_stock" model="ir.actions.act_window">
             <field name="name">Stock</field>
             <field name="res_model">distribution.stock</field>
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">kanban,tree,form,graph,pivot</field>
             <field name="help" type="html">
                 <p>Monitor and adjust stock levels efficiently.</p>
             </field>

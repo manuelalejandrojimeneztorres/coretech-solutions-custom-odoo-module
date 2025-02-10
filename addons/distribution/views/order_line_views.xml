@@ -11,11 +11,11 @@
                         <group>
                             <group string="Order Information" col="6">
                                 <field name="available_product_ids" invisible="1" />
-                                <field name="sale_id" options="{'no_open': True}" readonly="1" />
+                                <field name="sale_id" options="{'no_open': True}" />
                                 <field name="product_id" widget="many2one_avatar"
                                     domain="[('id', 'in', available_product_ids)]"
                                     options="{'no_create': True}" />
-                                <field name="stock_id" readonly="1" />
+                                <field name="stock_id" />
                             </group>
                             <group string="Pricing" col="6">
                                 <field name="quantity" class="oe_inline" />
@@ -23,7 +23,7 @@
                                     options="{'currency_field': 'currency_id'}" />
                                 <field name="subtotal" widget="monetary"
                                     options="{'currency_field': 'currency_id'}"
-                                    readonly="1" />
+                                />
                             </group>
                         </group>
                     </sheet>
@@ -32,7 +32,7 @@
         </record>
 
         <!-- Order Line Kanban View -->
-        <record id="view_order_line_kanban" model="ir.ui.view">
+        <!-- <record id="view_order_line_kanban" model="ir.ui.view">
             <field name="name">distribution.order_line.kanban</field>
             <field name="model">distribution.order_line</field>
             <field name="arch" type="xml">
@@ -67,7 +67,7 @@
                     </templates>
                 </kanban>
             </field>
-        </record>
+        </record> -->
 
         <!-- Order Line Tree View -->
         <record id="view_order_line_tree" model="ir.ui.view">
@@ -76,7 +76,6 @@
             <field name="arch" type="xml">
                 <tree editable="bottom">
                     <field name="available_product_ids" invisible="1" />
-                    <field name="product_id" widget="many2one_avatar" />
                     <field name="product_id" widget="many2one_avatar"
                         domain="[('id', 'in', available_product_ids)]" />
                     <field name="quantity" class="oe_number" />

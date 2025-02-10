@@ -40,9 +40,7 @@ class OrderLine(models.Model):
     price_unit = fields.Float(
         string='Unit Price', 
         required=True,
-        digits='Product Price',
-        readonly=True,
-        states={'draft': [('readonly', False)]}
+        digits='Product Price'
     )
     subtotal = fields.Float(
         string='Subtotal', 

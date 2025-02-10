@@ -49,7 +49,7 @@
         </record>
 
         <!-- Customer Kanban View -->
-        <record id="view_customer_kanban" model="ir.ui.view">
+        <!-- <record id="view_customer_kanban" model="ir.ui.view">
             <field name="name">distribution.customer.kanban</field>
             <field name="model">distribution.customer</field>
             <field name="arch" type="xml">
@@ -57,14 +57,15 @@
                     <templates>
                         <t t-name="kanban-box">
                             <div class="oe_kanban_card oe_kanban_global_click">
-                                <t t-if="not record.active.raw_value">
+                                <t t-if="not record.active.value">
                                     <div class="oe_kanban_ribbon oe_kanban_ribbon_red">
                                         <span>Archived</span>
                                     </div>
                                 </t>
                                 <div class="o_kanban_image">
                                     <img
-                                        t-att-src="record.image_1920.raw_value ? ('data:image/png;base64,' + record.image_1920.raw_value) : '/web/static/img/customer-placeholder.png'"
+                                        t-att-src="record.image_1920.raw_value ? 'data:image/png;base64,' + record.image_1920.raw_value :
+        '/web/static/img/customer-placeholder.png'"
                                         class="oe_kanban_image img-fluid rounded-circle" />
                                 </div>
                                 <div class="o_kanban_details">
@@ -88,7 +89,7 @@
                     </templates>
                 </kanban>
             </field>
-        </record>
+        </record> -->
 
         <!-- Customer Tree View -->
         <record id="view_customer_tree" model="ir.ui.view">

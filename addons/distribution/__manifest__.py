@@ -14,17 +14,17 @@ CoreTech Distribution
 Manage customers, warehouses, products, sales, and stock efficiently.
 Includes features for order management, inventory tracking, and role-based access control.
     """,
-    'depends': ['base', 'sale', 'stock', 'mail'],
+    'depends': ['base', 'web', 'sale', 'stock', 'mail'],
     'data': [
         'data/actions_data.xml',
         'security/security_groups.xml',
         'security/ir.model.access.csv',
         'data/menu_coretech_data.xml',
-        'views/actions_data.xml',
         'views/customer_views.xml',
         'views/warehouse_views.xml',
         'views/product_views.xml',
         'views/sale_views.xml',
+        'reports/sale_reports.xml',
         'views/stock_views.xml',
         'views/order_line_views.xml'
     ],

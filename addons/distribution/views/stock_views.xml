@@ -32,8 +32,7 @@
                                         <field name="quantity" readonly="1" /> - <field
                                             name="reserved_quantity" readonly="1" /> = <span
                                             class="text-success">
-                                            <span
-                                                t-esc="record.quantity.raw_value - record.reserved_quantity.raw_value" />
+                                            <field name="available_quantity" readonly="1" />
                                         </span>
                                     </span>
                                 </div>
@@ -45,7 +44,7 @@
         </record>
 
         <!-- Stock Kanban View -->
-        <record id="view_stock_kanban" model="ir.ui.view">
+        <!-- <record id="view_stock_kanban" model="ir.ui.view">
             <field name="name">distribution.stock.kanban</field>
             <field name="model">distribution.stock</field>
             <field name="arch" type="xml">
@@ -85,7 +84,7 @@
                     </templates>
                 </kanban>
             </field>
-        </record>
+        </record> -->
 
         <!-- Stock Tree View -->
         <record id="view_stock_tree" model="ir.ui.view">
@@ -102,11 +101,35 @@
             </field>
         </record>
 
+        <!-- Stock Graph View: Stock by Warehouse -->
+        <record id="view_stock_level_graph" model="ir.ui.view">
+            <field name="name">distribution.stock.graph</field>
+            <field name="model">distribution.stock</field>
+            <field name="arch" type="xml">
+                <graph type="pie">
+                    <field name="quantity" type="measure" />
+                    <field name="warehouse_id" type="group" />
+                </graph>
+            </field>
+        </record>
+
+        <!-- Stock Pivot View: Analysis with Pivot Tables -->
+        <record id="view_stock_pivot" model="ir.ui.view">
+            <field name="name">distribution.stock.pivot</field>
+            <field name="model">distribution.stock</field>
+            <field name="arch" type="xml">
+                <pivot>
+                    <field name="warehouse_id" type="col" />
+                    <field name="quantity" type="measure" />
+                </pivot>
+            </field>
+        </record>
+
         <!-- Window Action -->
         <record id="action_stock" model="ir.actions.act_window">
             <field name="name">Stock</field>
             <field name="res_model">distribution.stock</field>
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">kanban,tree,form,graph,pivot</field>
             <field name="context">{'search_default_group_by_product': 1}</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">

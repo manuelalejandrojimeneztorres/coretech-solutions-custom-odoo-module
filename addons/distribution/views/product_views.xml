@@ -72,7 +72,7 @@
         </record>
 
         <!-- Product Kanban View -->
-        <record id="view_product_kanban" model="ir.ui.view">
+        <!-- <record id="view_product_kanban" model="ir.ui.view">
             <field name="name">distribution.product.kanban</field>
             <field name="model">distribution.product</field>
             <field name="arch" type="xml">
@@ -82,7 +82,8 @@
                             <div class="oe_kanban_card oe_kanban_global_click">
                                 <div class="o_kanban_image">
                                     <img
-                                        t-att-src="record.image_1920.raw_value ? ('data:image/png;base64,' + record.image_1920.raw_value) : '/web/static/img/product-placeholder.png'"
+                                        t-att-src="record.image_1920.raw_value ? ('data:image/png;base64,' + record.image_1920.raw_value) :
+        '/web/static/img/product-placeholder.png'"
                                         class="oe_kanban_image img-fluid" />
                                 </div>
                                 <div class="o_kanban_details">
@@ -112,7 +113,7 @@
                     </templates>
                 </kanban>
             </field>
-        </record>
+        </record> -->
 
         <!-- Product Tree View -->
         <record id="view_product_tree" model="ir.ui.view">

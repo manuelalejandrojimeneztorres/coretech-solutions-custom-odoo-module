@@ -1,0 +1,40 @@
+/* General styles */
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.report-table th {
+    background-color: #3498db !important;
+    color: white !important;
+    padding: 12px;
+    text-align: left;
+}
+
+.report-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.total-row {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+/* Header */
+.report-header {
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+/* Footer */
+.report-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #3498db;
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 0.9em;
+}

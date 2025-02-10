@@ -30,6 +30,8 @@
                         <group>
                             <group string="Order Details" col="6">
                                 <field name="customer_id" options="{'no_open': True}" />
+                                <field name="company_id" widget="res_company"
+                                    options="{'no_open': True}" />
                                 <field name="warehouse_id" options="{'no_open': True}" />
                                 <field name="currency_id" widget="res_currency" invisible="1" />
                             </group>
@@ -63,7 +65,7 @@
         </record>
 
         <!-- Sale Order Kanban View -->
-        <record id="view_sale_kanban" model="ir.ui.view">
+        <!-- <record id="view_sale_kanban" model="ir.ui.view">
             <field name="name">distribution.sale.kanban</field>
             <field name="model">distribution.sale</field>
             <field name="arch" type="xml">
@@ -104,7 +106,7 @@
                     </templates>
                 </kanban>
             </field>
-        </record>
+        </record> -->
 
         <!-- Sale Order Tree View -->
         <record id="view_sale_tree" model="ir.ui.view">
@@ -122,11 +124,37 @@
             </field>
         </record>
 
+        <!-- Sale Order Graph View: Sales Order by Product -->
+        <record id="view_sale_graph" model="ir.ui.view">
+            <field name="name">distribution.sale.graph</field>
+            <field name="model">distribution.sale</field>
+            <field name="arch" type="xml">
+                <graph type="bar">
+                    <field name="total_amount" type="measure" />
+                    <field name="warehouse_id" type="group" />
+                    <field name="date" interval="month" type="row" />
+                </graph>
+            </field>
+        </record>
+
+        <!-- Sale Order Pivot View: Analysis with Pivot Tables -->
+        <record id="view_sale_pivot" model="ir.ui.view">
+            <field name="name">distribution.sale.pivot</field>
+            <field name="model">distribution.sale</field>
+            <field name="arch" type="xml">
+                <pivot>
+                    <field name="date" type="row" interval="month" />
+                    <field name="warehouse_id" type="col" />
+                    <field name="total_amount" type="measure" />
+                </pivot>
+            </field>
+        </record>
+
         <!-- Window Action -->
         <record id="action_sale" model="ir.actions.act_window">
             <field name="name">Sales Orders</field>
             <field name="res_model">distribution.sale</field>
-            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_mode">kanban,tree,form,graph,pivot</field>
             <field name="context">{'search_default_draft': 1}</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
@@ -139,5 +167,9 @@
         <menuitem id="menu_sale_main" name="Sales Orders" parent="distribution.menu_root" />
         <menuitem id="menu_sale_management" name="Sales Order Management"
             parent="menu_sale_main" action="action_sale" />
+        <menuitem id="menu_sale_analysis" name="Analysis with Pivot Tables"
+            parent="menu_sale_main" action="action_sale_dashboard" />
+        <menuitem id="menu_sale_reports" name="Sales Order Reports"
+            parent="menu_sale_main" action="action_report_sale" />
     </data>
 </odoo>
